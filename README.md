@@ -5,16 +5,19 @@ A full-stack web application built with MongoDB, Express.js, React.js, and Node.
 ## Features
 
 ### 1. User Authentication
+
 - Admin login with JWT authentication
 - Secure password hashing using bcrypt
 - Protected routes and API endpoints
 
 ### 2. Agent Management
+
 - Create, read, update, and delete agents
 - Each agent has: Name, Email, Mobile Number, Password
 - Agent status management (Active/Inactive)
 
 ### 3. CSV Upload & Distribution
+
 - Upload CSV, XLS, or XLSX files
 - Automatic validation of file format and content
 - Equal distribution of items among active agents
@@ -22,6 +25,7 @@ A full-stack web application built with MongoDB, Express.js, React.js, and Node.
 - Handles remainder distribution intelligently
 
 ### 4. Dashboard
+
 - Overview statistics (total agents, lists, items)
 - Recent uploads display
 - Real-time data updates
@@ -44,12 +48,14 @@ A full-stack web application built with MongoDB, Express.js, React.js, and Node.
 ## Installation & Setup
 
 ### 1. Clone the Repository
+
 ```bash
 git clone <repository-url>
 cd mern_test
 ```
 
 ### 2. Backend Setup
+
 ```bash
 # Install backend dependencies
 npm install
@@ -60,6 +66,7 @@ cp .env.example .env
 ```
 
 ### 3. Frontend Setup
+
 ```bash
 # Navigate to client directory
 cd client
@@ -72,18 +79,21 @@ cd ..
 ```
 
 ### 4. Database Setup
+
 ```bash
 # Make sure MongoDB is running locally, then create admin user
 node setup-admin.js
 ```
 
 This will create an admin user with:
+
 - Email: admin@example.com
 - Password: admin123
 
 ### 5. Running the Application
 
 #### Development Mode (Recommended)
+
 ```bash
 # Terminal 1: Start backend server
 npm run dev
@@ -94,6 +104,7 @@ npm start
 ```
 
 #### Production Mode
+
 ```bash
 # Build frontend
 cd client
@@ -105,17 +116,20 @@ npm start
 ```
 
 The application will be available at:
+
 - Frontend: http://localhost:3000 (development) or http://localhost:5000 (production)
 - Backend API: http://localhost:5000
 
 ## API Endpoints
 
 ### Authentication
+
 - `POST /api/auth/login` - User login
 - `POST /api/auth/register` - Register new admin (optional)
 - `GET /api/auth/verify` - Verify JWT token
 
 ### Agents
+
 - `GET /api/agents` - Get all agents
 - `POST /api/agents` - Create new agent
 - `PUT /api/agents/:id` - Update agent
@@ -123,6 +137,7 @@ The application will be available at:
 - `GET /api/agents/:id` - Get single agent
 
 ### Lists
+
 - `GET /api/lists` - Get all uploaded lists
 - `POST /api/lists/upload` - Upload and distribute CSV file
 - `GET /api/lists/:id` - Get single list with distributions
@@ -131,16 +146,20 @@ The application will be available at:
 ## File Upload Requirements
 
 ### Supported Formats
+
 - CSV (.csv)
 - Excel (.xlsx, .xls)
 
 ### Required Columns
+
 Your file must contain these columns (case-insensitive):
+
 - `FirstName` or `First Name` - Contact's first name
 - `Phone` or `Mobile` - Contact's phone number
 - `Notes` - Additional notes (optional)
 
 ### Example CSV Format
+
 ```csv
 FirstName,Phone,Notes
 John,+1234567890,Interested in product A
@@ -149,6 +168,7 @@ Mike,+1234567892,Potential customer
 ```
 
 ### File Limitations
+
 - Maximum file size: 5MB
 - Must have at least FirstName and Phone columns
 - Phone numbers should include country codes
@@ -233,10 +253,12 @@ A sample CSV file (`sample-data.csv`) is included for testing the upload functio
 ### Common Issues
 
 1. **MongoDB Connection Error**
+
    - Ensure MongoDB is running locally
    - Check MONGODB_URI in .env file
 
 2. **File Upload Issues**
+
    - Verify file format (CSV, XLS, XLSX only)
    - Check file size (max 5MB)
    - Ensure required columns exist

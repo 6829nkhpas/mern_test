@@ -1,29 +1,31 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const jwt = require("jsonwebtoken");
+const User = require("../models/User");
 
 const auth = async (req, res, next) => {
   try {
-    const token = req.header('Authorization');
-    
+    const token = req.header("Authorization");
+
     if (!token) {
-      return res.status(401).json({ message: 'No token, authorization denied' });
+      return res
+        .status(401)
+        .json({ message: "No token, authorization denied" });
     }
 
     // Check if token starts with 'Bearer '
-    const actualToken = token.startsWith('Bearer ') ? token.slice(7) : token;
-    
+    const actualToken = token.startsWith("Bearer ") ? token.slice(7) : token;
+
     const decoded = jwt.verify(actualToken, process.env.JWT_SECRET);
-    
-    const user = await User.findById(decoded.userId).select('-password');
+
+    const user = await User.findById(decoded.userId).select("-password");
     if (!user) {
-      return res.status(401).json({ message: 'Token is not valid' });
+      return res.status(401).json({ message: "Token is not valid" });
     }
-    
+
     req.user = user;
     next();
   } catch (error) {
-    console.error('Auth middleware error:', error);
-    res.status(401).json({ message: 'Token is not valid' });
+    console.error("Auth middleware error:", error);
+    res.status(401).json({ message: "Token is not valid" });
   }
 };
 

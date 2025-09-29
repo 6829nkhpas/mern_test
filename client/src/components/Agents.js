@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Agents = () => {
   const [agents, setAgents] = useState([]);
@@ -7,13 +7,13 @@ const Agents = () => {
   const [showModal, setShowModal] = useState(false);
   const [editingAgent, setEditingAgent] = useState(null);
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    mobile: '',
-    password: ''
+    name: "",
+    email: "",
+    mobile: "",
+    password: "",
   });
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   useEffect(() => {
     fetchAgents();
@@ -22,11 +22,11 @@ const Agents = () => {
   const fetchAgents = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('/api/agents');
+      const response = await axios.get("/api/agents");
       setAgents(response.data.agents || []);
     } catch (error) {
-      console.error('Error fetching agents:', error);
-      setError('Failed to fetch agents');
+      console.error("Error fetching agents:", error);
+      setError("Failed to fetch agents");
     } finally {
       setLoading(false);
     }
@@ -35,14 +35,14 @@ const Agents = () => {
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setSuccess('');
+    setError("");
+    setSuccess("");
 
     try {
       if (editingAgent) {
@@ -51,22 +51,22 @@ const Agents = () => {
         if (!updateData.password) {
           delete updateData.password; // Don't update password if not provided
         }
-        
+
         await axios.put(`/api/agents/${editingAgent._id}`, updateData);
-        setSuccess('Agent updated successfully');
+        setSuccess("Agent updated successfully");
       } else {
         // Create new agent
-        await axios.post('/api/agents', formData);
-        setSuccess('Agent created successfully');
+        await axios.post("/api/agents", formData);
+        setSuccess("Agent created successfully");
       }
-      
+
       // Reset form and close modal
       resetForm();
       setShowModal(false);
       fetchAgents();
     } catch (error) {
-      console.error('Error saving agent:', error);
-      setError(error.response?.data?.message || 'Failed to save agent');
+      console.error("Error saving agent:", error);
+      setError(error.response?.data?.message || "Failed to save agent");
     }
   };
 
@@ -76,34 +76,34 @@ const Agents = () => {
       name: agent.name,
       email: agent.email,
       mobile: agent.mobile,
-      password: '' // Don't populate password for security
+      password: "", // Don't populate password for security
     });
     setShowModal(true);
   };
 
   const handleDelete = async (agentId) => {
-    if (window.confirm('Are you sure you want to delete this agent?')) {
+    if (window.confirm("Are you sure you want to delete this agent?")) {
       try {
         await axios.delete(`/api/agents/${agentId}`);
-        setSuccess('Agent deleted successfully');
+        setSuccess("Agent deleted successfully");
         fetchAgents();
       } catch (error) {
-        console.error('Error deleting agent:', error);
-        setError(error.response?.data?.message || 'Failed to delete agent');
+        console.error("Error deleting agent:", error);
+        setError(error.response?.data?.message || "Failed to delete agent");
       }
     }
   };
 
   const resetForm = () => {
     setFormData({
-      name: '',
-      email: '',
-      mobile: '',
-      password: ''
+      name: "",
+      email: "",
+      mobile: "",
+      password: "",
     });
     setEditingAgent(null);
-    setError('');
-    setSuccess('');
+    setError("");
+    setSuccess("");
   };
 
   const openCreateModal = () => {
@@ -141,20 +141,30 @@ const Agents = () => {
           {agents.map((agent) => (
             <div key={agent._id} className="agent-card">
               <h3>{agent.name}</h3>
-              <p><strong>Email:</strong> {agent.email}</p>
-              <p><strong>Mobile:</strong> {agent.mobile}</p>
-              <p><strong>Status:</strong> {agent.isActive ? 'Active' : 'Inactive'}</p>
-              <p><strong>Created:</strong> {new Date(agent.createdAt).toLocaleDateString()}</p>
-              
+              <p>
+                <strong>Email:</strong> {agent.email}
+              </p>
+              <p>
+                <strong>Mobile:</strong> {agent.mobile}
+              </p>
+              <p>
+                <strong>Status:</strong>{" "}
+                {agent.isActive ? "Active" : "Inactive"}
+              </p>
+              <p>
+                <strong>Created:</strong>{" "}
+                {new Date(agent.createdAt).toLocaleDateString()}
+              </p>
+
               <div className="agent-actions">
-                <button 
-                  className="btn btn-primary" 
+                <button
+                  className="btn btn-primary"
                   onClick={() => handleEdit(agent)}
                 >
                   Edit
                 </button>
-                <button 
-                  className="btn btn-danger" 
+                <button
+                  className="btn btn-danger"
                   onClick={() => handleDelete(agent._id)}
                 >
                   Delete
@@ -169,10 +179,10 @@ const Agents = () => {
       {showModal && (
         <div className="modal-overlay">
           <div className="modal">
-            <h2>{editingAgent ? 'Edit Agent' : 'Add New Agent'}</h2>
-            
+            <h2>{editingAgent ? "Edit Agent" : "Add New Agent"}</h2>
+
             {error && <div className="error-message">{error}</div>}
-            
+
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="name">Name</label>
@@ -185,7 +195,7 @@ const Agents = () => {
                   required
                 />
               </div>
-              
+
               <div className="form-group">
                 <label htmlFor="email">Email</label>
                 <input
@@ -197,9 +207,11 @@ const Agents = () => {
                   required
                 />
               </div>
-              
+
               <div className="form-group">
-                <label htmlFor="mobile">Mobile Number (with country code)</label>
+                <label htmlFor="mobile">
+                  Mobile Number (with country code)
+                </label>
                 <input
                   type="text"
                   id="mobile"
@@ -210,10 +222,10 @@ const Agents = () => {
                   required
                 />
               </div>
-              
+
               <div className="form-group">
                 <label htmlFor="password">
-                  Password {editingAgent && '(leave blank to keep current)'}
+                  Password {editingAgent && "(leave blank to keep current)"}
                 </label>
                 <input
                   type="password"
@@ -225,13 +237,13 @@ const Agents = () => {
                   minLength="6"
                 />
               </div>
-              
+
               <div className="modal-actions">
                 <button type="button" className="btn" onClick={closeModal}>
                   Cancel
                 </button>
                 <button type="submit" className="btn btn-success">
-                  {editingAgent ? 'Update Agent' : 'Create Agent'}
+                  {editingAgent ? "Update Agent" : "Create Agent"}
                 </button>
               </div>
             </form>

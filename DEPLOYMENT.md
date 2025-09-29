@@ -3,11 +3,13 @@
 ## Quick Start Instructions
 
 ### 1. Prerequisites
+
 - Node.js (v14+)
 - MongoDB (local or cloud)
 - Git
 
 ### 2. Clone and Setup
+
 ```bash
 # Clone the repository
 git clone https://github.com/6829nkhpas/mern_test.git
@@ -25,6 +27,7 @@ npm run setup
 ```
 
 ### 3. Development Mode
+
 ```bash
 # Terminal 1: Start backend (from root directory)
 npm run dev
@@ -36,6 +39,7 @@ npm run client
 ### 4. Production Deployment
 
 #### Option A: Same Server (Recommended for testing)
+
 ```bash
 # Build frontend
 cd client && npm run build && cd ..
@@ -45,13 +49,16 @@ npm start
 ```
 
 #### Option B: Separate Deployment
+
 Deploy backend and frontend separately to different services (Heroku, Vercel, etc.)
 
 ## Default Login Credentials
-- **Email**: admin@example.com  
+
+- **Email**: admin@example.com
 - **Password**: admin123
 
 ## Application Features Checklist
+
 ✅ User Authentication with JWT  
 ✅ Agent CRUD Operations  
 ✅ CSV/Excel File Upload  
@@ -59,7 +66,7 @@ Deploy backend and frontend separately to different services (Heroku, Vercel, et
 ✅ Dashboard with Statistics  
 ✅ Responsive UI Design  
 ✅ File Validation & Error Handling  
-✅ Protected Routes  
+✅ Protected Routes
 
 ## Testing the Application
 
@@ -70,13 +77,15 @@ Deploy backend and frontend separately to different services (Heroku, Vercel, et
 5. **Dashboard**: Verify statistics update correctly
 
 ## File Upload Test
-- Use `sample-data.csv` (included) 
+
+- Use `sample-data.csv` (included)
 - Contains 15 sample records
 - Tests equal distribution logic
 
 ## Production Considerations
+
 - Use environment variables for all secrets
-- Enable CORS for your domain only  
+- Enable CORS for your domain only
 - Use HTTPS in production
 - Set up proper MongoDB indexes
 - Implement rate limiting
@@ -84,4 +93,5 @@ Deploy backend and frontend separately to different services (Heroku, Vercel, et
 - Set up logging and monitoring
 
 ## Support
+
 For issues or questions, check the main README.md file for detailed documentation.
