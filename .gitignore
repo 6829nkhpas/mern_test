@@ -1,0 +1,15 @@
+node_modules
+.env
+.DS_Store
+build
+coverage
+npm-debug.log
+yarn-error.log
+.vscode
+.idea
+*.iml
+
+# Ignore local environment files
+.env.local
+.env.development.local
+.env.test.local   

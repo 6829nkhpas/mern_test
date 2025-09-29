@@ -9,6 +9,9 @@
     "client": "cd client && npm start",
     "server": "nodemon server.js",
     "build": "cd client && npm run build",
+    "setup": "node setup-admin.js",
+    "install-client": "cd client && npm install",
+    "install-all": "npm install && cd client && npm install",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "dependencies": {
